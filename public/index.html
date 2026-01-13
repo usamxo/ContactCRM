@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ContactCRM</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="container">
+      <div>
+        <h1>ContactCRM</h1>
+        <p class="muted">A minimal contacts/CRM app with search, tags, and local JSON storage.</p>
+      </div>
+      <div class="right">
+        <span class="badge" id="statusBadge">Offline</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h2>Add Contact</h2>
+      <form id="createForm" class="grid">
+        <label><span>Name</span><input name="name" type="text" placeholder="e.g., Jane Doe" required></label>
+        <label><span>Email</span><input name="email" type="email" placeholder="e.g., jane@company.com"></label>
+        <label><span>Phone</span><input name="phone" type="text" placeholder="e.g., +49 123 456"></label>
+        <label><span>Company</span><input name="company" type="text" placeholder="e.g., Acme GmbH"></label>
+        <label><span>Tags</span><input name="tags" type="text" placeholder="e.g., lead, vip"></label>
+        <label><span>Notes</span><input name="notes" type="text" placeholder="Optional"></label>
+        <div class="actions">
+          <button type="submit">Add</button>
+          <button type="button" class="ghost" id="resetBtn">Reset</button>
+        </div>
+      </form>
+      <p class="hint">Tip: click an item to edit; press Escape to cancel edit.</p>
+    </section>
+
+    <section class="split">
+      <section class="card">
+        <div class="row">
+          <h2>Contacts</h2>
+          <div class="row right">
+            <input id="searchInput" class="search" placeholder="Search..." />
+            <button class="ghost" id="refreshBtn">Refresh</button>
+          </div>
+        </div>
+
+        <div id="filters" class="filters"></div>
+        <div id="list" class="list"></div>
+
+        <div class="row space-between">
+          <div class="muted" id="countLabel">0 items</div>
+          <button class="danger ghost" id="deleteAllBtn">Delete all</button>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Summary</h2>
+        <div id="summary" class="summary"></div>
+      </section>
+    </section>
+
+    <section class="card" id="editCard" hidden>
+      <div class="row space-between">
+        <h2>Edit Contact</h2>
+        <button class="ghost" id="cancelEditBtn">Cancel</button>
+      </div>
+      <form id="editForm" class="grid">
+        <input type="hidden" name="id" />
+        <label><span>Name</span><input name="name" type="text" placeholder="e.g., Jane Doe" required></label>
+        <label><span>Email</span><input name="email" type="email" placeholder="e.g., jane@company.com"></label>
+        <label><span>Phone</span><input name="phone" type="text" placeholder="e.g., +49 123 456"></label>
+        <label><span>Company</span><input name="company" type="text" placeholder="e.g., Acme GmbH"></label>
+        <label><span>Tags</span><input name="tags" type="text" placeholder="e.g., lead, vip"></label>
+        <label><span>Notes</span><input name="notes" type="text" placeholder="Optional"></label>
+        <div class="actions">
+          <button type="submit">Save changes</button>
+          <button type="button" class="danger" id="deleteBtn">Delete</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer class="container footer muted">
+    Built with Node.js + Express. Data stored locally in <code>data/db.json</code>.
+  </footer>
+
+  <script src="/app.js"></script>
+</body>
+</html>
